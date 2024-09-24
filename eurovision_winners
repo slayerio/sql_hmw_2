@@ -31,19 +31,19 @@
 -- SELECT COUNT(*)
 -- FROM song_details
 -- WHERE language = 'English';
-
+-- 
 -- 8
 -- SELECT avg(song_length_seconds)
 -- FROM song_details
-
+-- 
 -- 9
 -- SELECT year FROM eurovision_winners
 -- WHERE song_name = 'Hallelujah'
-
---10
+-- 
+-- 10
 -- SELECT min(year) FROM song_details
 -- WHERE solo_performance = False
-
+-- 
 -- 11
 -- SELECT eu.song_name, s.song_length_seconds
 -- FROM eurovision_winners eu
@@ -51,4 +51,63 @@
 -- WHERE song_length_seconds = (
 -- SELECT max(song_length_seconds) 
 -- FROM song_details)
-
+-- 
+-- 12
+-- SELECT country, max(win_count)
+-- FROM (
+-- 	SELECT country, count(country) AS win_count 
+-- 	FROM eurovision_winners
+-- 	GROUP BY country
+-- 	)
+-- 
+-- 14
+-- SELECT eu.* FROM eurovision_winners eu
+-- JOIN song_details s
+-- ON eu.year = s.year
+-- WHERE s.language = 'French';
+-- 
+-- 15
+-- SELECT max(year), min(year) FROM eurovision_winners
+-- WHERE country = 'Israel'
+--  
+-- 16
+-- SELECT eu.song_name, eu.country, eu.year, s.song_length_seconds
+-- FROM eurovision_winners eu
+-- JOIN song_details s ON s.year = eu.year
+-- ORDER BY s.song_length_seconds DESC
+-- 
+-- 17
+-- SELECT eu.*, s.song_length_seconds
+-- FROM eurovision_winners eu
+-- JOIN song_details s ON eu.year = s.year
+-- WHERE song_length_seconds > (
+-- SELECT avg(song_length_seconds) 
+-- FROM song_details)
+-- 
+-- 18
+-- SELECT * FROM eurovision_winners eu
+-- JOIN song_details s 
+-- on s.year = eu.year
+-- WHERE s.solo_performance = 1
+-- ORDER BY s.song_length_seconds ASC
+-- LIMIT 1
+-- 
+-- 19
+-- SELECT eu.country, count(*), avg(s.song_length_seconds)
+-- FROM eurovision_winners eu
+-- JOIN song_details s ON s.year = eu.year
+-- GROUP BY eu.country 
+-- ORDER BY avg(s.song_length_seconds)
+-- 
+-- 20
+-- SELECT count(*) FROM song_details
+-- WHERE language <> 'English'
+-- 
+-- 21
+-- SELECT count(DISTINCT genre) FROM song_details 
+-- 
+-- 22
+-- SELECT * FROM eurovision_winners
+-- WHERE country = 'Israel'
+-- ORDER BY year DESC
+-- LIMIT 1
