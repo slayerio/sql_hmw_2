@@ -1,0 +1,15 @@
+import sqlite3
+
+# Step 1: Connect to the database
+conn = sqlite3.connect('hmw_2_eurovision.db') 
+conn.row_factory = sqlite3.Row 
+cursor = conn.cursor()
+
+cursor.execute('SELECT COUNT(DISTINCT genre) AS genre_count FROM song_details')  # Replace 'songs' with your table name
+result = cursor.fetchone()
+print(f"Total distinct genres: {result['genre_count']}")
+
+
+conn.close()
+
+
