@@ -9,6 +9,28 @@ cursor.execute('SELECT COUNT(DISTINCT genre) AS genre_count FROM song_details') 
 result = cursor.fetchone()
 print(f"Total distinct genres: {result['genre_count']}")
 
+cursor.execute("SELECT count(*) AS no_english FROM song_details WHERE language <> 'English'")
+result2 = cursor.fetchone()
+print(f"there are {result2[no_english]} that won and not in english")
+conn.close()
+
+--2
+import sqlite3
+
+conn = sqlite3.connect('hmw_2_eurovision.db')
+cursor = conn.cursor()
+
+cursor.execute('''
+    UPDATE song_details
+    SET song_length_seconds = 180
+    WHERE year = 2018 AND song_length_seconds = 175;
+''')
+
+conn.commit()
+
+cursor.execute('SELECT year, song_length_seconds FROM song_details WHERE year = 2018')
+updated_result = cursor.fetchone()
+print(f"Updated song length for 2018: {updated_result['song_length_seconds']} seconds")
 
 conn.close()
 
